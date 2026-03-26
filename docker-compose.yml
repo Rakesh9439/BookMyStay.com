@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  service-registry:
+    build: ./service-registery
+    container_name: service-registry
+    ports:
+      - "8761:8761"
+
+  api-gateway:
+    build: ./api-gateway-1
+    container_name: api-gateway
+    ports:
+      - "5555:5555"
+    depends_on:
+      - service-registry
+
+  user-service:
+    build: ./user-service
+    container_name: user-service
+    ports:
+      - "8086:8080"
+    depends_on:
+      - service-registry
+
+  auth-service:
+    build: ./auth-service
+    container_name: auth-service
+    ports:
+      - "8082:8080"
+
+  property-service:
+    build: ./property-service
+    container_name: property-service
+    ports:
+      - "8084:8080"
+
+  translation-service:
+    build: ./translation-service
+    container_name: translation-service
+    ports:
+      - "8087:8080"
