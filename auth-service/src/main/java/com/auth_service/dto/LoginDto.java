@@ -1,7 +1,14 @@
 package com.auth_service.dto;
 
+import com.auth_service.validation.ValidEmail;
+import jakarta.validation.constraints.NotBlank;
+
 public class LoginDto {
 
+
+
+    @NotBlank(message = "Email is required")
+    @ValidEmail
     private String email;
     private String password;
 

@@ -30,6 +30,8 @@ public class SecurityConfig {
             "/api/v1/auth/signup",
             "/api/v1/auth/logout/**",
             "/api/v1/auth/change-password",
+            "/api/v1/auth/translate",
+            "/actuator/**",
             //  "/api/v1/welcome/message",
             //  "/api/v1/welcome/message",
             "/v3/api-docs/**",
@@ -60,15 +62,14 @@ public class SecurityConfig {
 
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider(
+    public AuthenticationProvider authenticationProvider(
             CustomUserDetailsService customUserDetailsService,
             PasswordEncoder passwordEncoder) {
 
-        DaoAuthenticationProvider authProvider =
-                new DaoAuthenticationProvider(customUserDetailsService);
-
-        authProvider.setPasswordEncoder(passwordEncoder);
-        return authProvider;
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(customUserDetailsService);
+        provider.setPasswordEncoder(passwordEncoder); // ✅ CORRECT
+        return provider;
     }
 
 

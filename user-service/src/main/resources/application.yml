@@ -1,0 +1,31 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: property-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/bookmystay-userservice-db
+    username: root
+    password: rakesh@#1997
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  boot:
+    admin:
+      client:
+        url: http://localhost:8085   # Admin Server URL
+  # =============================
+  # Actuator Configuration
+  # =============================
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+    endpoint:
+      health:
+        show-details: always

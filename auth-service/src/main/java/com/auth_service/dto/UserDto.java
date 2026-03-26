@@ -1,6 +1,8 @@
 package com.auth_service.dto;
 
 import com.auth_service.constants.Role;
+import com.auth_service.validation.ValidEmail;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +21,8 @@ public class UserDto {
     private String name;
 
 
-
+    @NotBlank(message = "Email is required")
+    @ValidEmail
     private String email;
 
     private String password;
